@@ -61,7 +61,6 @@ module Adapter
       }
     end
 
-
     def movie_view(movie_info, cast)
       if movie_info.count == 1
         movie_info=movie_info[0]
@@ -71,12 +70,10 @@ module Adapter
           'releaseYear': movie_info['releaseDate'],
           'revenue': movie_info['revenue'],
           'posterPath': movie_info['posterPath'],
-          # TODO criar metodo para isso!
-          'genres': movie_info['genre'],
+          'genres': Genre.where(id: movie_info["genres"]).pluck(:name),
           'cast': cast.map {|each_cast| cast_view(movie_info, each_cast)}
         }
       end
-
     end
 
     def cast_view(movie_info, cast)

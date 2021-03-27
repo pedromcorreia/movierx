@@ -3,10 +3,11 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
+    if Genre.exists?(name: params['genre'].gsub('+', ' '))
+      movies_info = Adapter::Adapter.new(genre: params['genre'], offset: params['offset'], limit: params['limit']).call
 
-    movies_info = Adapter::Adapter.new(genre: params['genre'], offset: params['offset'], limit: params['limit']).call
-
-    render json: movies_info
+      render json: movies_info
+    end
   end
 
   # GET /movies/1
@@ -40,9 +41,9 @@ class MoviesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_movie
-      @movie = Movie.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
 
 end
