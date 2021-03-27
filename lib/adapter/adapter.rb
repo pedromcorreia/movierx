@@ -3,91 +3,57 @@
 # TODO: add here a good description
 module Adapter
   class Adapter
-
     require 'dalli'
+    attr_accessor :query, :type, :limit, :offset
 
-    def initialize(genre:, offset:, limit:)
-      @genre = genre
-      @offset = offset
-      @limit = limit
-      @errors = []
+    def initialize(options = {})
+      @dc = Dalli::Client.new('localhost:11211')
+
+      @query = options[:query]
+      @offset = options[:offset]
+      @limit = options[:limit]
+      @type = options[:type]
     end
 
     def call
-      movies_ids = GenreAdapter.new(genre: @genre, offset: @offset, limit: @limit).call
-      json = movies_ids.map do |movie_id|
-        movie_info = MovieAdapter.new(ids: movie_id).call
+      response_stored = find_cached_data
 
-        if movie_info.nil?
-          put_error(movie_id, "movie")
-        else
-          movie_info.map do |movie_ids|
-            cast = movie_ids['cast'].map do |cast_id|
-              CastAdapter.new(id: cast_id).call
-            end
-            movie_view(movie_info, cast)
-          end
-        end
-      end
-      view(json)
+      return response_stored if response_stored
+
+      result = request
+      return unless result
+
+      store_data(result)
+      result
     end
 
     private
-    def put_error(id, type)
-      if type == "movie"
-        @errors.push({
-          "errorCode": 450,
-          "message": "Movie id ##{id} details can not be retrieved"
-        })
+
+    def find_cached_data
+      @dc.get({ id: @query, type: @type })
+    end
+
+    def store_data(result)
+      @dc.set({ id: @query, type: @type }, result)
+    end
+
+    def request
+      result = host_type.call
+      if result.status == 500
+        nil
       else
-        @errors.push({
-          "errorCode": 440,
-          "message": "Movie id ##{id} cast info is not complete"
-        })
-
-      end
-    end
-    def view(json)
-      {
-        data: {
-          movies: json
-        },
-        "metadata": {
-          "offset": @offset,
-          "limit": @limit,
-          "total": json.count
-        },
-        "errors": @errors.uniq
-      }
-    end
-
-    def movie_view(movie_info, cast)
-      if movie_info.count == 1
-        movie_info=movie_info[0]
-        {
-          'id': movie_info['id'],
-          'title': movie_info['title'],
-          'releaseYear': movie_info['releaseDate'],
-          'revenue': movie_info['revenue'],
-          'posterPath': movie_info['posterPath'],
-          'genres': Genre.where(id: movie_info["genres"]).pluck(:name),
-          'cast': cast.map {|each_cast| cast_view(movie_info, each_cast)}
-        }
+        JSON.parse(result.body)['data']
       end
     end
 
-    def cast_view(movie_info, cast)
-      if cast
-        cast = cast[0]
-        {
-          'id': cast['id'],
-          'gender': cast['gender'],
-          'name': cast['name'],
-          'profilePath': cast['profilePath']
-        }
-      else
-        put_error(movie_info['id'], "cast")
-        []
+    def host_type
+      case @type
+      when 'cast'
+        Adapters::Cast.new({ query: @query })
+      when 'genre'
+        Adapters::Genre.new({ query: @query, offset: @offset, limit: @limit })
+      when 'movie'
+        Adapters::Movie.new({ query: @query })
       end
     end
   end

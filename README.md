@@ -27,3 +27,8 @@ Things you may want to cover:
 ## Decisions
 
 1. Use memcached to store on memory the writee response
+
+Some posts to understand
+https://schneems.com/post/20472425017/super-charge-your-rails-app-with-rack-cache-and
+
+https://aws.amazon.com/elasticache/redis-vs-memcached/
