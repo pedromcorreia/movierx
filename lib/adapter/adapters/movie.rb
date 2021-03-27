@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+# Adapter resposible to the module for find and create the response for the
+# request
 module Adapter
-  module Adapters
-    # TODO: add here a good description
+  class Adapters
+    # Movie is responsible find the current movie_id
     class Movie
       attr_accessor :query
       def initialize(options = {})

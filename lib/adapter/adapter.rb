@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
-# TODO: add here a good description
+# Adapter resposible to the module for find and create the response for the
+# request
 module Adapter
+  # This class is a reusable class for find the response data and store in memcache
+  # if the response for the Third Party API is 200, we will store the response in
+  # the correct id and type
+  # This descrese the response time for the client and will avoid the 500 status response
+  # We use dalli to store the data in memory
   class Adapter
     require 'dalli'
     attr_accessor :query, :type, :limit, :offset

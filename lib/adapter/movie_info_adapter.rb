@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-# TODO: add here a good description
+# Adapter resposible to the module for find and create the response for the
+# request
 module Adapter
+  # MovieInfoAdapter is responsible to create the json view for the genre
+  # arguments, find the write
   class MovieInfoAdapter
-    require 'dalli'
-
     def initialize(genre:, offset:, limit:)
       @genre = genre
       @offset = offset
@@ -15,7 +16,7 @@ module Adapter
     def call
       genre_infos = Adapter.new(query: @genre, type: :genre, offset: @offset, limit: @limit).call
       infos = find_genre_infos(genre_infos)
-      create_json(infos)
+      { infos: infos, errors: @errors }
     end
 
     private
@@ -38,20 +39,6 @@ module Adapter
         end
         movie_json(movie_info, cast)
       end
-    end
-
-    def put_error(id, type)
-      case type
-      when :movie
-        code = 450
-        message = "Movie id ##{id} details can not be retrieved"
-      when :cast
-        code = 440
-        message = "Movie id ##{id} cast info is not complete"
-      end
-
-      @errors.push({ "errorCode": code, "message": message })
-      []
     end
 
     def create_json(infos)
@@ -89,5 +76,19 @@ module Adapter
         profilePath: cast['profilePath']
       }
     end
+  end
+
+  def put_error(id, type)
+    case type
+    when :movie
+      code = 450
+      message = "Movie id ##{id} details can not be retrieved"
+    when :cast
+      code = 440
+      message = "Movie id ##{id} cast info is not complete"
+    end
+
+    @errors.push({ "errorCode": code, "message": message })
+    []
   end
 end

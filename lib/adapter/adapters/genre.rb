@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+# Adapter resposible to the module for find and create the response for the
+# request
 module Adapter
-  module Adapters
-    # TODO: add here a good description
+  class Adapters
+    # Genre is responsible find the current genre_id
     class Genre
       attr_accessor :query, :limit, :offset
       def initialize(options = {})
