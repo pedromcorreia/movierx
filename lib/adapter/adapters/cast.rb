@@ -7,6 +7,7 @@ module Adapter
     # Cast is responsible find the current artist_id
     class Cast
       attr_accessor :query
+
       def initialize(options = {})
         @query = options[:query]
       end

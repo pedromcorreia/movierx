@@ -7,6 +7,7 @@ module Adapter
     # Movie is responsible find the current movie_id
     class Movie
       attr_accessor :query
+
       def initialize(options = {})
         @query = options[:query]
       end

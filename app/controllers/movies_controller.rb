@@ -1,7 +1,8 @@
-class MoviesController < ApplicationController
+# frozen_string_literal: true
 
+class MoviesController < ApplicationController # rubocop:todo Style/Documentation
   def index
-    if Genre.exists?(name: params['genre'].gsub('+', ' '))
+    if Genre.exists?(name: params['genre'].gsub('+', ' ')) # rubocop:todo Style/GuardClause
       offset = params['offset']
       limit = params['limit']
 
