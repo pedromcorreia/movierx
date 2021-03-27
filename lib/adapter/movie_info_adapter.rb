@@ -13,81 +13,81 @@ module Adapter
     end
 
     def call
-      movies_ids = Adapter.new(query: @genre, type: "genre", offset: @offset, limit: @limit).call
-      json = movies_ids.map do |movie_id|
-        movie_info = Adapter.new(query: movie_id, type: "movie").call
-
-        if movie_info.nil?
-          put_error(movie_id, "movie")
-        else
-          movie_info.map do |movie_ids|
-            cast = movie_ids['cast'].map do |cast_id|
-              Adapter.new(query: cast_id, type: "cast").call
-            end
-            movie_view(movie_info, cast)
-          end
-        end
-      end
-      view(json)
+      genre_infos = Adapter.new(query: @genre, type: :genre, offset: @offset, limit: @limit).call
+      infos = find_genre_infos(genre_infos)
+      create_json(infos)
     end
 
     private
-    def put_error(id, type)
-      if type == "movie"
-        @errors.push({
-          "errorCode": 450,
-          "message": "Movie id ##{id} details can not be retrieved"
-        })
-      else
-        @errors.push({
-          "errorCode": 440,
-          "message": "Movie id ##{id} cast info is not complete"
-        })
 
+    def find_genre_infos(genre_infos)
+      return [] unless genre_infos
+
+      genre_infos.map do |movie_id|
+        movie_info = Adapter.new(query: movie_id, type: :movie).call
+        find_movie_info(movie_info, movie_id)
       end
     end
-    def view(json)
+
+    def find_movie_info(movie_info, movie_id)
+      return put_error(movie_id, :movie) if movie_info.nil?
+
+      movie_info.map do |movie_ids|
+        cast = movie_ids['cast'].map do |cast_id|
+          Adapter.new(query: cast_id, type: :cast).call
+        end
+        movie_json(movie_info, cast)
+      end
+    end
+
+    def put_error(id, type)
+      case type
+      when :movie
+        code = 450
+        message = "Movie id ##{id} details can not be retrieved"
+      when :cast
+        code = 440
+        message = "Movie id ##{id} cast info is not complete"
+      end
+
+      @errors.push({ "errorCode": code, "message": message })
+      []
+    end
+
+    def create_json(infos)
       {
-        data: {
-          movies: json
+        data: { movies: infos.reject!(&:empty?) },
+        metadata: {
+          offset: @offset,
+          limit: @limit,
+          total: infos.count
         },
-        "metadata": {
-          "offset": @offset,
-          "limit": @limit,
-          "total": json.count
-        },
-        "errors": @errors.uniq
+        errors: @errors.uniq
       }
     end
 
-    def movie_view(movie_info, cast)
-      if movie_info.count == 1
-        movie_info=movie_info[0]
-        {
-          'id': movie_info['id'],
-          'title': movie_info['title'],
-          'releaseYear': movie_info['releaseDate'],
-          'revenue': movie_info['revenue'],
-          'posterPath': movie_info['posterPath'],
-          'genres': Genre.where(id: movie_info["genres"]).pluck(:name),
-          'cast': cast.map {|each_cast| cast_view(movie_info, each_cast)}
-        }
-      end
+    def movie_json(movie_info, cast)
+      return unless movie_info.count == 1
+
+      info = movie_info.first
+      {
+        id: info['id'], title: info['title'], releaseYear: info['releaseDate'],
+        revenue: info['revenue'], posterPath: info['posterPath'],
+        genres: Genre.where(id: info['genres']).pluck(:name),
+        cast: cast.map { |each_cast| cast_json(info, each_cast) }.reject!(&:empty?)
+      }
     end
 
-    def cast_view(movie_info, cast)
-      if cast
-        cast = cast[0]
-        {
-          'id': cast['id'],
-          'gender': cast['gender'],
-          'name': cast['name'],
-          'profilePath': cast['profilePath']
-        }
-      else
-        put_error(movie_info['id'], "cast")
-        []
-      end
+    def cast_json(movie_info, cast)
+      return put_error(movie_info['id'], :cast) if cast.nil?
+
+      cast = cast[0]
+      {
+        id: cast['id'],
+        gender: cast['gender'],
+        name: cast['name'],
+        profilePath: cast['profilePath']
+      }
     end
   end
 end

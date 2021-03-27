@@ -48,11 +48,11 @@ module Adapter
 
     def host_type
       case @type
-      when 'cast'
+      when :cast
         Adapters::Cast.new({ query: @query })
-      when 'genre'
+      when :genre
         Adapters::Genre.new({ query: @query, offset: @offset, limit: @limit })
-      when 'movie'
+      when :movie
         Adapters::Movie.new({ query: @query })
       end
     end
