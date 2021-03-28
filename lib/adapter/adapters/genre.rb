@@ -6,6 +6,7 @@ module Adapter
   module Adapters
     # Genre is responsible find the current genre_id
     class Genre
+      HOST = ENV['GENRE']
       attr_accessor :query, :limit, :offset
 
       def initialize(options = {})
@@ -21,7 +22,7 @@ module Adapter
       private
 
       def request
-        Faraday.get("http://localhost:3040/movies?genre=#{@query}&offset=#{@offset}&limit=#{@limit}")
+        Faraday.get("#{HOST}movies?genre=#{@query}&offset=#{@offset}&limit=#{@limit}")
       end
     end
   end

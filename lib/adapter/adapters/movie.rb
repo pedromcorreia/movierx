@@ -6,6 +6,7 @@ module Adapter
   module Adapters
     # Movie is responsible find the current movie_id
     class Movie
+      HOST = ENV['MOVIE']
       attr_accessor :query
 
       def initialize(options = {})
@@ -19,7 +20,7 @@ module Adapter
       private
 
       def request
-        Faraday.get("http://localhost:3030/movies?ids=#{query}")
+        Faraday.get("#{HOST}movies?ids=#{query}")
       end
     end
   end

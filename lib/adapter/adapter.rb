@@ -10,11 +10,10 @@ module Adapter
   # We use dalli to store the data in memory
   class Adapter
     require 'dalli'
+    DC = Dalli::Client.new(ENV['MEMCACHED'])
     attr_accessor :query, :type, :limit, :offset
 
     def initialize(options = {})
-      @dc = Dalli::Client.new('localhost:11211')
-
       @query = options[:query]
       @offset = options[:offset]
       @limit = options[:limit]
@@ -36,11 +35,11 @@ module Adapter
     private
 
     def find_cached_data
-      # @dc.get({ id: @query, type: @type })
+      DC.get({ id: @query, type: @type }) if ENV['MEMCACHED']
     end
 
     def store_data(result)
-      # @dc.set({ id: @query, type: @type }, result)
+      DC.set({ id: @query, type: @type }, result) if ENV['MEMCACHED']
     end
 
     def request

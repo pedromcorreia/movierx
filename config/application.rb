@@ -20,6 +20,8 @@ require 'rails/test_unit/railtie'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'dotenv'
+Dotenv.load
 
 module Movierx
   class Application < Rails::Application # rubocop:todo Style/Documentation
@@ -38,6 +40,7 @@ module Movierx
 
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
-    config.cache_store = :memory_store
+    config.cache_store = :dalli_store
+
   end
 end

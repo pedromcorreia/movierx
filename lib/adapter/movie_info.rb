@@ -68,7 +68,6 @@ module Adapter
     end
 
     def put_error(id, type)
-#      byebug
       case type
       when :movie
         code = 450

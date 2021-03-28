@@ -6,6 +6,7 @@ module Adapter
   module Adapters
     # Cast is responsible find the current artist_id
     class Cast
+      HOST = ENV['CAST']
       attr_accessor :query
 
       def initialize(options = {})
@@ -19,7 +20,7 @@ module Adapter
       private
 
       def request
-        Faraday.get("http://localhost:3050/artists?ids=#{@query}")
+        Faraday.get("#{HOST}artists?ids=#{@query}")
       end
     end
   end
