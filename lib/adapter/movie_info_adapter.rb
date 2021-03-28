@@ -76,19 +76,19 @@ module Adapter
         profilePath: cast['profilePath']
       }
     end
-  end
 
-  def put_error(id, type)
-    case type
-    when :movie
-      code = 450
-      message = "Movie id ##{id} details can not be retrieved"
-    when :cast
-      code = 440
-      message = "Movie id ##{id} cast info is not complete"
+    def put_error(id, type)
+      case type
+      when :movie
+        code = 450
+        message = "Movie id ##{id} details can not be retrieved"
+      when :cast
+        code = 440
+        message = "Movie id ##{id} cast info is not complete"
+      end
+
+      @errors.push({ "errorCode": code, "message": message })
+      []
     end
-
-    @errors.push({ "errorCode": code, "message": message })
-    []
   end
 end

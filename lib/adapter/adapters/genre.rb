@@ -3,7 +3,7 @@
 # Adapter resposible to the module for find and create the response for the
 # request
 module Adapter
-  class Adapters
+  module Adapters
     # Genre is responsible find the current genre_id
     class Genre
       attr_accessor :query, :limit, :offset

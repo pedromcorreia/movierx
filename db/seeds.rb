@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-file = File.read("#{Rails.root}/db/seeds/gender.json")
+file = File.read(Rails.root.join('db/seeds/gender.json'))
 
 data_hash = JSON.parse(file)
 data_hash.each do |data|

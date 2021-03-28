@@ -3,7 +3,7 @@
 # Adapter resposible to the module for find and create the response for the
 # request
 module Adapter
-  class Adapters
+  module Adapters
     # Movie is responsible find the current movie_id
     class Movie
       attr_accessor :query

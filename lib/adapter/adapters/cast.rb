@@ -3,7 +3,7 @@
 # Adapter resposible to the module for find and create the response for the
 # request
 module Adapter
-  class Adapters
+  module Adapters
     # Cast is responsible find the current artist_id
     class Cast
       attr_accessor :query
