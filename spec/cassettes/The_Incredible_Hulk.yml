@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3030/movies?ids=1724
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '696'
+      Etag:
+      - W/"2b8-MIUXfKhaYHQyt5Rf44UAiO5jf7Y"
+      Date:
+      - Sun, 28 Mar 2021 14:17:10 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":0,"limit":1,"total":1},"data":[{"id":1724,"title":"The
+        Incredible Hulk","tagline":"You''ll like him when he''s angry.","overview":"Scientist
+        Bruce Banner scours the planet for an antidote to the unbridled force of rage
+        within him: the Hulk. But when the military masterminds who dream of exploiting
+        his powers force him back to civilization, he finds himself coming face to
+        face with a new, deadly foe.","popularity":22.619048,"runtime":114,"releaseDate":"2008-06-12","revenue":163712074,"budget":150000000,"posterPath":"https://image.tmdb.org/t/p/w342/bleR2qj9UluYl7x0Js7VXuLhV3s.jpg","originalLanguage":"en","genres":[878,28,12],"cast":[819,882,3129,227,1462,15232,68277]}]}'
+  recorded_at: Sun, 28 Mar 2021 14:17:10 GMT
+recorded_with: VCR 6.0.0

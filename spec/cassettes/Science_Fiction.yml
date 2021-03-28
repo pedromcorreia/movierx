@@ -1,0 +1,412 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3040/movies?genre=Science%20Fiction&limit=1&offset=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '62'
+      Etag:
+      - W/"3e-AvCqpZUGfBten6WtzIPvR+G4zLE"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":10,"limit":1,"total":80},"data":[76341]}'
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3030/movies?ids=76341
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1002'
+      Etag:
+      - W/"3ea-hEmQ8tvnpNFh5qQ5IFvqENTxuYY"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":0,"limit":1,"total":1},"data":[{"id":76341,"title":"Mad
+        Max: Fury Road","tagline":"What a Lovely Day.","overview":"An apocalyptic
+        story set in the furthest reaches of our planet, in a stark desert landscape
+        where humanity is broken, and most everyone is crazed fighting for the necessities
+        of life. Within this world exist two rebels on the run who just might be able
+        to restore order. There''s Max, a man of action and a man of few words, who
+        seeks peace of mind following the loss of his wife and child in the aftermath
+        of the chaos. And Furiosa, a woman of action and a woman who believes her
+        path to survival may be achieved if she can make it across the desert back
+        to her childhood homeland.","popularity":26.413841,"runtime":120,"releaseDate":"2015-05-13","revenue":378858340,"budget":150000000,"posterPath":"https://image.tmdb.org/t/p/w342/kqjL17yufvn9OVLyXYpvtyrFfak.jpg","originalLanguage":"en","genres":[28,12,878,53],"cast":[2524,6885,3292,26060,1056053,24898,37153]}]}'
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=2524
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '214'
+      Etag:
+      - W/"d6-4xD2BcEveGobgaIsADZ33ONlxug"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":0,"limit":1,"total":1},"data":[{"id":"2524","name":"Tom
+        Hardy","profilePath":"https://image.tmdb.org/t/p/w185/4CR1D9VLWZcmGgh4b6kKuY2NOel.jpg","gender":2,"movies":[281957,76341,49026,27205]}]}'
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=6885
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '21'
+      Etag:
+      - W/"15-/6VXivhc2MKdLfIkLcUE47K6aH0"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Internal Server Error
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=3292
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '21'
+      Etag:
+      - W/"15-/6VXivhc2MKdLfIkLcUE47K6aH0"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Internal Server Error
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=26060
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '203'
+      Etag:
+      - W/"cb-t3TNd0MtENyaVGzqTDtQiTt6sqA"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":0,"limit":1,"total":1},"data":[{"id":"26060","name":"Hugh
+        Keays-Byrne","profilePath":"https://image.tmdb.org/t/p/w185/lhYUcPimMMy7Ltp58NkB3RuJzSv.jpg","gender":2,"movies":[76341]}]}'
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=1056053
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '200'
+      Etag:
+      - W/"c8-it/8RUwxTCdkpzoq9X+UfIG8apE"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":0,"limit":1,"total":1},"data":[{"id":"1056053","name":"Josh
+        Helman","profilePath":"https://image.tmdb.org/t/p/w185/rmj2HHc1uNESTlHk50qnCHK11jD.jpg","gender":2,"movies":[76341]}]}'
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=24898
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '199'
+      Etag:
+      - W/"c7-B/XU9IONfYEWCCPxXa2X1npBbZI"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":0,"limit":1,"total":1},"data":[{"id":"24898","name":"Nathan
+        Jones","profilePath":"https://image.tmdb.org/t/p/w185/tNaBOoDSHBaqnoVG4bxShyGLZol.jpg","gender":2,"movies":[76341]}]}'
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+- request:
+    method: get
+    uri: http://localhost:3050/artists?ids=37153
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '21'
+      Etag:
+      - W/"15-/6VXivhc2MKdLfIkLcUE47K6aH0"
+      Date:
+      - Sun, 28 Mar 2021 13:40:44 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Internal Server Error
+  recorded_at: Sun, 28 Mar 2021 13:40:44 GMT
+recorded_with: VCR 6.0.0

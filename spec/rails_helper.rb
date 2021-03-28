@@ -21,6 +21,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     Rails.application.load_seed # loading seeds
   end
+  config.example_status_persistence_file_path = 'success_tests.txt'
 end
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
