@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3040/movies?genre=Not%20existent%20genre&limit=1&offset=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Etag:
+      - W/"2f-emqheQ6LZbcT2otJuLLaKWWPmTY"
+      Date:
+      - Sun, 28 Mar 2021 14:51:30 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"Genre Not existent genre is unknown"}'
+  recorded_at: Sun, 28 Mar 2021 14:51:30 GMT
+recorded_with: VCR 6.0.0

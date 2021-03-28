@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3030/movies?ids=-1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - content-type, authorization, content-length, x-requested-with, accept, origin
+      Access-Control-Allow-Methods:
+      - POST, GET, OPTIONS
+      Allow:
+      - POST, GET, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '56'
+      Etag:
+      - W/"38-MIa2p+b5jdSzutsQJfnqfF+5Q1E"
+      Date:
+      - Sun, 28 Mar 2021 15:00:16 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"metadata":{"offset":-1,"limit":1,"total":0},"data":[]}'
+  recorded_at: Sun, 28 Mar 2021 15:00:16 GMT
+recorded_with: VCR 6.0.0
