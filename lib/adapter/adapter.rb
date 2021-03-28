@@ -36,11 +36,11 @@ module Adapter
     private
 
     def find_cached_data
-      #@dc.get({ id: @query, type: @type })
+      # @dc.get({ id: @query, type: @type })
     end
 
     def store_data(result)
-      #@dc.set({ id: @query, type: @type }, result)
+      # @dc.set({ id: @query, type: @type }, result)
     end
 
     def request
@@ -60,6 +60,8 @@ module Adapter
         Adapters::Genre.new({ query: @query, offset: @offset, limit: @limit })
       when :movie
         Adapters::Movie.new({ query: @query })
+      else
+        raise StandardError, 'Unsuported genre'
       end
     end
   end

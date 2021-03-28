@@ -13,10 +13,7 @@ RSpec.describe Adapter::Adapters::Movie do
   end
 
   describe '.call' do
-    subject(:subject_class) do
-      described_class.new(value).call
-    end
-
+    subject(:subject_class) { described_class.new(value).call }
     let(:response) { JSON(subject_class.body) }
     let(:data) { JSON(subject_class.body)['data'].first }
 
@@ -31,11 +28,11 @@ RSpec.describe Adapter::Adapters::Movie do
 
       it 'response with valid movie infos' do
         VCR.use_cassette(title, record: :once) do
-          expect(response.keys).to eq(%w[metadata data])
-          expect(data['id']).to eq(value[:query])
-          expect(data['title']).to eq(title)
-          expect(data['genres']).to eq([878, 28, 12])
-          expect(data['cast']).to eq([819, 882, 3129, 227, 1462, 15_232, 68_277])
+          expect(response.keys).to match_array(%w[metadata data])
+          expect(data['id']).to eql(value[:query])
+          expect(data['title']).to eql(title)
+          expect(data['genres']).to eql([878, 28, 12])
+          expect(data['cast']).to eql([819, 882, 3129, 227, 1462, 15_232, 68_277])
         end
       end
     end

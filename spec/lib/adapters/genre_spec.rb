@@ -31,8 +31,8 @@ RSpec.describe Adapter::Adapters::Genre do
 
       it 'response with valid movie infos' do
         VCR.use_cassette(genre, record: :once) do
-          expect(response.keys).to eql(%w[metadata data])
-          expect(data).to eq(1724)
+          expect(response.keys).to match_array(%w[metadata data])
+          expect(data).to eql(1724)
         end
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe Adapter::Adapters::Genre do
 
       it 'response with valid movie infos' do
         VCR.use_cassette(genre, record: :once) do
-          expect(response).to eql({"error"=>"Genre Not existent genre is unknown"})
+          expect(response).to eql({ 'error' => 'Genre Not existent genre is unknown' })
         end
       end
     end

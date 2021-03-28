@@ -5,11 +5,13 @@
 module Adapter
   # MovieInfoAdapter is responsible to create the json view for the genre
   # arguments, find the write
-  class MovieInfoAdapter
-    def initialize(genre:, offset:, limit:)
-      @genre = genre
-      @offset = offset
-      @limit = limit
+  class MovieInfo
+    attr_accessor :genre, :offset, :limit
+
+    def initialize(options = {})
+      @genre = options[:genre]
+      @offset = options[:offset]
+      @limit = options[:limit]
       @errors = []
     end
 
@@ -27,7 +29,7 @@ module Adapter
       genre_infos.map do |movie_id|
         movie_info = Adapter.new(query: movie_id, type: :movie).call
         find_movie_info(movie_info, movie_id)
-      end
+      end.flatten
     end
 
     def find_movie_info(movie_info, movie_id)
@@ -39,18 +41,6 @@ module Adapter
         end
         movie_json(movie_info, cast)
       end
-    end
-
-    def create_json(infos)
-      {
-        data: { movies: infos.reject!(&:empty?) },
-        metadata: {
-          offset: @offset,
-          limit: @limit,
-          total: infos.count
-        },
-        errors: @errors.uniq
-      }
     end
 
     def movie_json(movie_info, cast)
@@ -78,6 +68,7 @@ module Adapter
     end
 
     def put_error(id, type)
+#      byebug
       case type
       when :movie
         code = 450

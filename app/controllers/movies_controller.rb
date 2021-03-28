@@ -6,8 +6,8 @@ class MoviesController < ApplicationController # rubocop:todo Style/Documentatio
       offset = params['offset'] || 0
       limit = params['limit'] || 10
 
-      result = Adapter::MovieInfoAdapter.new(genre: params['genre'],
-                                             offset: offset, limit: limit).call
+      result = Adapter::MovieInfo.new(genre: params['genre'],
+                                      offset: offset, limit: limit).call
 
       render json: movies_info_j(result, offset, limit)
     else

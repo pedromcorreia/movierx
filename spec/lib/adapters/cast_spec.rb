@@ -30,7 +30,7 @@ RSpec.describe Adapter::Adapters::Cast do
 
       it 'response with valid cast infos' do
         VCR.use_cassette(cast, record: :once) do
-          expect(data.keys).to eql(%w[id name profilePath gender movies])
+          expect(data.keys).to match_array(%w[id name profilePath gender movies])
           expect(data['name']).to eql(cast)
         end
       end
