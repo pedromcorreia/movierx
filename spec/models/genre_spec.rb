@@ -15,8 +15,9 @@ require 'rails_helper'
 RSpec.describe Genre, type: :model do
   describe '.create' do
     it 'should create new genre record' do
-      Genre.create(name: 'genre', external_id: 1)
-      expect { Genre.create(name: 'genre', external_id: 1) }.to change { Genre.count }
+      expect do
+        Genre.create(name: 'genre', external_id: 1)
+      end.to(change { Genre.count })
     end
 
     %i[name external_id].each do |field|

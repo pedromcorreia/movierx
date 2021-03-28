@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Movies', type: :request do
-  describe 'GET /mvoies' do
+  describe 'GET /movies' do
     context 'when params is valid' do
       ['Action', 'Science Fiction', 'Science+Fiction'].each do |genre|
         before(:all) do
-          VCR.use_cassette(genre, record: :once) do
+          VCR.use_cassette(genre, record: :new_episodes) do
             get movies_path, params: { genre: genre, limit: '1', offset: '10' }
           end
         end
@@ -31,13 +31,11 @@ RSpec.describe 'Movies', type: :request do
 
         it 'render correct valid response' do
           expect(response.content_type).to eq('application/json; charset=utf-8')
-          expect(response).to have_http_status(:ok)
+          expect(response).to have_http_status(:unprocessable_entity)
         end
 
-        it 'render correct data keys' do
-          expect(JSON.parse(response.body).keys).to eq(%w[data metadata errors])
-          expect(JSON.parse(response.body)['data'].keys).to eq(['movies'])
-          expect(JSON.parse(response.body)['metadata'].values).to eq([0, 10, 0])
+        it 'does not render with invalid gender' do
+          expect(JSON.parse(response.body)['errors']).to eq('limit or offset must be positive')
         end
       end
     end
