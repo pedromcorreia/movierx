@@ -16,7 +16,9 @@ module Adapter
     end
 
     def call
-      genre_infos = Adapter.new(query: @genre, type: :genre, offset: @offset, limit: @limit).call
+      genre_infos =
+        Adapter.new(query: @genre, type: :genre, offset: @offset,
+                    limit: @limit).call
       infos = find_genre_infos(genre_infos)
       { infos: infos, errors: @errors }
     end
@@ -43,8 +45,9 @@ module Adapter
       end
     end
 
+    # We need to return if the movie_info is empty
     def movie_json(movie_info, cast)
-      return unless movie_info.count == 1
+      return if movie_info.empty?
 
       info = movie_info.first
       {
@@ -58,12 +61,12 @@ module Adapter
     def cast_json(movie_info, cast)
       return put_error(movie_info['id'], :cast) if cast.nil?
 
-      cast = cast[0]
+      info = cast.first
       {
-        id: cast['id'],
-        gender: cast['gender'],
-        name: cast['name'],
-        profilePath: cast['profilePath']
+        id: info['id'],
+        gender: info['gender'],
+        name: info['name'],
+        profilePath: info['profilePath']
       }
     end
 
